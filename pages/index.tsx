@@ -90,4 +90,4 @@ export const getServerSideProps = async () => {
   }
 }
 
-// left at 2:11:36
+// left at 20:51 of Day 2
