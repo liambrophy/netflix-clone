@@ -5,7 +5,7 @@ import Link from "next/link";
 import Membership from "../components/Membership";
 import useAuth from "../hooks/useAuth";
 import useSubscription from "../hooks/useSubscription";
-import payments from "../lib/stripe";
+import payments, { goToBillingPortal } from "../lib/stripe";
 
 interface Props {
   products: Product[]
@@ -54,14 +54,17 @@ function Account({products}: Props) {
         md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4>Plan Details</h4>
           {/* Finding user's current plan */}
-          <div className="">
+          <div className="col-span-2 font-medium">
             {
               products.filter(
                 (product) => product.id === subscription?.product
               )[0]?.name
             }
           </div>
-          <p className="cursor-pointer text-blue-500 hover:underline md:text-right">
+          <p 
+            className="cursor-pointer text-blue-500 hover:underline md:text-right"
+            onClick={goToBillingPortal}
+          >
             Change Plan
           </p>
         </div>

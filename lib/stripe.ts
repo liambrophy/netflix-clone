@@ -35,4 +35,4 @@ const goToBillingPortal = async () => {
 }
 
 export { loadCheckout, goToBillingPortal }
-export default payments
+export default payments;

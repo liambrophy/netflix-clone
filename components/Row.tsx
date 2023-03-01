@@ -1,12 +1,12 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { useRef, useState } from "react";
-import { Movie } from "../typings";
-import Thumbnail from "./Thumbnail";
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { DocumentData } from 'firebase/firestore'
+import { useRef, useState } from 'react'
+import { Movie } from '../typings'
+import Thumbnail from './Thumbnail'
 
 interface Props {
   title: string
-  movies: Movie[]
-  // movie: Movie[] | DocumentData[] - For using FireBase
+  movies: Movie[] | DocumentData[]
 }
 
 function Row({ title, movies }: Props) {
@@ -14,17 +14,15 @@ function Row({ title, movies }: Props) {
   const [isMoved, setIsMoved] = useState(false)
 
   const handleClick = (direction: string) => {
-    setIsMoved(true);
-
+    setIsMoved(true)
     if (rowRef.current) {
       const { scrollLeft, clientWidth } = rowRef.current
 
       const scrollTo =
-        direction === "left"
+        direction === 'left'
           ? scrollLeft - clientWidth
           : scrollLeft + clientWidth
-
-      rowRef.current.scrollTo({ left: scrollTo, behavior: "smooth" })
+      rowRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' })
     }
   }
 
@@ -35,8 +33,9 @@ function Row({ title, movies }: Props) {
       </h2>
       <div className="group relative md:-ml-2">
         <ChevronLeftIcon
-          className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 
-            transition hover:scale-125 group-hover:opacity-100 ${!isMoved && '!hidden'}`}
+          className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100 ${
+            !isMoved && 'hidden'
+          }`}
           onClick={() => handleClick('left')}
         />
         <div
@@ -48,8 +47,7 @@ function Row({ title, movies }: Props) {
           ))}
         </div>
         <ChevronRightIcon
-          className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 
-            transition hover:scale-125 group-hover:opacity-100"
+          className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100"
           onClick={() => handleClick('right')}
         />
       </div>
@@ -57,4 +55,4 @@ function Row({ title, movies }: Props) {
   )
 }
 
-export default Row;
+export default Row
